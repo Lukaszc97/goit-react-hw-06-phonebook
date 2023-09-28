@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../../Redux/ContactsReducer';
 import styles from './ContactList.module.css';
 import PropTypes from 'prop-types';
+
 const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
@@ -18,6 +19,12 @@ const Contact = ({ id, name, number }) => {
   );
 };
 
+Contact.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+};
+
 const ContactList = () => {
   const contacts = useSelector((state) => state.contacts.contacts);
 
@@ -26,7 +33,7 @@ const ContactList = () => {
       {contacts.length > 0 ? (
         <ul className={styles.contactList}> 
           {contacts.map((contact) => (
-            <Contact key={contact.id} {...contact} />
+            <Contact key={contact.id} id={contact.id} {...contact} />
           ))}
         </ul>
       ) : (
@@ -35,9 +42,5 @@ const ContactList = () => {
     </div>
   );
 };
-Contact.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-};
+
 export default ContactList;

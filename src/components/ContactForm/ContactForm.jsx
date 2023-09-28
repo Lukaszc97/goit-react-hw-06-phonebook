@@ -1,7 +1,9 @@
+
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../Redux/ContactsReducer';
 import styles from './ContactForm.module.css';
+import { nanoid } from 'nanoid';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,9 @@ const ContactForm = () => {
     ) {
       alert(`Contact with the name "${name}" already exists.`);
     } else {
-      dispatch(addContact({ name, number }));
+      
+      const id = nanoid();
+      dispatch(addContact({ id, name, number }));
       setName('');
       setNumber('');
     }
