@@ -1,41 +1,43 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteContact } from '../../Redux/ContactsReducer';
 import styles from './ContactList.module.css';
+import PropTypes from 'prop-types';
+const Contact = ({ id, name, number }) => {
+  const dispatch = useDispatch();
 
-const Contact = ({ id, name, number, onDeleteContact }) => (
-  <li className={styles.contactItem}>
-    {name}: {number}
-    <button className={styles.deleteButton} onClick={() => onDeleteContact(id)}>Delete</button>
-  </li>
-);
+  const handleDelete = () => {
+    dispatch(deleteContact(id));
+  };
 
-const ContactList = ({ contacts, onDeleteContact }) => (
-  <div>
-    {contacts.length > 0 ? (
-      <ul className={styles.contactList}>
-        {contacts.map(contact => (
-          <Contact
-            key={contact.id}
-            {...contact}
-            onDeleteContact={onDeleteContact}
-          />
-        ))}
-      </ul>
-    ) : (
-      <p>No contacts to display.</p>
-    )}
-  </div>
-);
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onDeleteContact: PropTypes.func.isRequired,
+  return (
+    <li className={styles.listItem}>
+      {name}: {number}{' '}
+      <button onClick={handleDelete} className={styles.deleteButton}>Delete</button> 
+    </li>
+  );
 };
 
+const ContactList = () => {
+  const contacts = useSelector((state) => state.contacts.contacts);
+
+  return (
+    <div>
+      {contacts.length > 0 ? (
+        <ul className={styles.contactList}> 
+          {contacts.map((contact) => (
+            <Contact key={contact.id} {...contact} />
+          ))}
+        </ul>
+      ) : (
+        <p>No contacts to display.</p>
+      )}
+    </div>
+  );
+};
+Contact.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+};
 export default ContactList;
