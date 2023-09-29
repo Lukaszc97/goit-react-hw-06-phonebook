@@ -5,7 +5,6 @@ import styles from './Filter.module.css';
 
 const Filter = () => {
   const filter = useSelector((state) => state.contacts.filter);
-  const contacts = useSelector((state) => state.contacts.contacts);
   const dispatch = useDispatch();
 
   const handleFilterChange = (event) => {
