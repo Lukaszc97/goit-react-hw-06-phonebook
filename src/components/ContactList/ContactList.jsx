@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './ContactList.module.css';
 import PropTypes from 'prop-types';
-import { deleteContact } from '../../Redux/ContactsReducer'; // Zaimportuj akcję usuwania
+import { deleteContact } from '../../Redux/ContactsReducer'; 
 
 const Contact = ({ id, name, number, onDeleteClick }) => {
   return (
