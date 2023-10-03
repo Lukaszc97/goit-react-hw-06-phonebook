@@ -13,6 +13,7 @@ const persistedReducer = persistReducer(persistConfig, contactsReducer);
 const store = configureStore({
   reducer: {
     contacts: persistedReducer,
+    filter: '',
   },
 });
 
