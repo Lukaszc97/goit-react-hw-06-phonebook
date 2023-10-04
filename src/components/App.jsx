@@ -5,7 +5,7 @@ import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 
 function App() {
-  const contacts = useSelector((state) => state.contacts.contacts);
+  const contacts = useSelector((state) => state.contacts);
 
   return (
     <div style={{ margin: 'auto', textAlign: 'center' }}>

@@ -4,7 +4,7 @@ import { setFilter } from '../../Redux/ContactsReducer';
 import styles from './Filter.module.css';
 
 const Filter = () => {
-  const filter = useSelector((state) => state.contacts.filter);
+  const filter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   const handleFilterChange = (event) => {

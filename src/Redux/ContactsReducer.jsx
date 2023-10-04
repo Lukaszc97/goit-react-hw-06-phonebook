@@ -4,22 +4,25 @@ export const addContact = createAction('contacts/addContact');
 export const deleteContact = createAction('contacts/deleteContact');
 export const setFilter = createAction('contacts/setFilter');
 
-const initialState = {
-  contacts: [],
-  filter: '',
-};
+const contactInitialState = [];
 
-const contactsReducer = createReducer(initialState, (builder) => {
+
+const contactsReducer = createReducer(contactInitialState, (builder) => {
   builder
     .addCase(addContact, (state, action) => {
-      state.contacts.push(action.payload);
+      state.push(action.payload);
     })
     .addCase(deleteContact, (state, action) => {
-      state.contacts = state.contacts.filter((contact) => contact.id !== action.payload);
-    })
+      return state.filter((contact) => contact.id !== action.payload);
+    }).addDefaultCase((state) => state);
+    
+});
+
+const filterReducer = createReducer("", (builder) => {
+  builder
     .addCase(setFilter, (state, action) => {
-      state.filter = action.payload.toLowerCase();
+      return action.payload.toLowerCase();
     });
 });
 
-export default contactsReducer;
+export { contactsReducer, filterReducer };
